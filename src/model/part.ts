@@ -9,18 +9,18 @@ export interface IPart {
 
 export type IHead = IPart
 
-abstract class Part implements IPart {
-    type: ComponentType
+export abstract class Part implements IPart {
+    abstract readonly type: ComponentType
 }
 
-export class Head extends Part implements IHead {
-    type = ComponentType.Head
+export abstract class Head extends Part implements IHead {
+    readonly type = ComponentType.Head
 }
 
 export type IBody = IPart
 
-export class Body extends Part implements IBody {
-    type = ComponentType.Body
+export abstract class Body extends Part implements IBody {
+    readonly type = ComponentType.Body
 }
 
 export type IStructure = Record<ComponentType, IPart>

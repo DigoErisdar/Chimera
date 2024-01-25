@@ -3,51 +3,29 @@ export enum AttrsType {
 }
 
 interface IAttrs {
-    type: AttrsType
-    name: string
-    description?: string
+    readonly type: AttrsType
+    readonly name: string
+    readonly description?: string
     value: number
-
-    add: (value: number) => IAttrs
-    minus: (value: number) => IAttrs
     validate: (value: number) => number
 }
 
 export abstract class Attrs implements IAttrs {
-    abstract type: AttrsType
-    abstract name: string
-    value = 0
-
-    private changeValue(value: number, operator: '+' | '-'): number {
-        let newValue = this.value
-        switch (operator) {
-            case '+':
-                newValue += value
-                break
-            case '-':
-                newValue -= value
-                break
-            default:
-                return newValue
-        }
+    abstract readonly type: AttrsType
+    abstract readonly name: string
+    #value = 0
+    set value(newValue: number) {
         try {
-            this.value = this.validate(newValue)
-        } catch (e) {
-            console.error(`Атрибут не может быть равен ${this.value}`)
-        }
+            this.#value = this.validate(newValue)
+        } catch (e) {}
     }
 
-    add(value: number): IAttrs {
-        this.changeValue(value, '+')
-        return this
-    }
-
-    minus(value: number): IAttrs {
-        this.changeValue(value, '-')
-        return this
+    get value() {
+        return this.#value
     }
 
     validate(value: number) {
+        if (typeof value !== 'number') throw Error('Значение должно быть числовым')
         return value
     }
 }

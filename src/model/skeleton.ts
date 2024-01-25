@@ -1,20 +1,10 @@
-import {
-    Body,
-    ComponentType,
-    Head,
-    IBody,
-    IHead,
-    IPart,
-    IStructure
-} from '@/shared/heroes/model/part.ts'
+import { Body, ComponentType, Head, IBody, IHead, IPart, IStructure } from '../model/part.ts'
 
 interface ISkeleton {
     components: IStructure
-    setHead: (component: IHead) => ISkeleton
-    setBody: (component: IBody) => ISkeleton
 }
 
-class Skeleton implements ISkeleton {
+export class Skeleton implements ISkeleton {
     components: IStructure = {
         [ComponentType.Head]: undefined,
         [ComponentType.Body]: undefined
@@ -24,19 +14,20 @@ class Skeleton implements ISkeleton {
         this.components[component.type] = component
     }
 
-    setHead(component: IHead): Skeleton {
-        this.setComponent(component)
-        return this
+    //TODO: Попробовать использовать defineProperty
+    get head() {
+        return this.components[ComponentType.Head]
     }
 
-    setBody(component: IBody): Skeleton {
-        this.setComponent(component)
-        return this
+    set head(component: IHead) {
+        if (component instanceof Head) this.setComponent(component)
+    }
+
+    get body() {
+        return this.components[ComponentType.Body]
+    }
+
+    set body(component: IBody) {
+        if (component instanceof Body) this.setComponent(component)
     }
 }
-
-const head: IHead = new Head()
-const body: IBody = new Body()
-const skeleton: ISkeleton = new Skeleton().setHead(head).setBody(body)
-
-console.log(skeleton.components)

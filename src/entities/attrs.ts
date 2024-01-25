@@ -1,9 +1,13 @@
-import { Attrs, AttrsType } from '@/shared/heroes/model/attrs.ts'
+import { Attrs, AttrsType } from '../model/attrs.ts'
 
 export class HP extends Attrs {
-    type = AttrsType.hp
-    name = 'Здоровье'
-    value = 0
+    readonly type = AttrsType.hp
+    readonly name = 'Здоровье'
+
+    constructor(defaultValue: number = 0) {
+        super()
+        this.value = defaultValue
+    }
 
     validate(value: number): number {
         if (value < 0) value = 0
