@@ -1,3 +1,5 @@
+import { IAttrsCollection } from '@/model/attrs.ts'
+
 export enum ComponentType {
     Head = 'head',
     Body = 'body'
@@ -5,16 +7,18 @@ export enum ComponentType {
 
 export interface IPart {
     type: ComponentType
+    attrs: IAttrsCollection
 }
 
 export type IHead = IPart
 
 export abstract class Part implements IPart {
-    abstract readonly type: ComponentType
+    readonly type: ComponentType
+    readonly attrs: IAttrsCollection
 }
 
 export abstract class Head extends Part implements IHead {
-    static get type(): ComponentType {
+    public static get type(): ComponentType {
         return ComponentType.Head
     }
 }
@@ -22,7 +26,7 @@ export abstract class Head extends Part implements IHead {
 export type IBody = IPart
 
 export abstract class Body extends Part implements IBody {
-    static get type(): ComponentType {
+    public static get type(): ComponentType {
         return ComponentType.Body
     }
 }

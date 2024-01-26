@@ -2,6 +2,10 @@ export enum AttrsType {
     hp = 'hp'
 }
 
+export type IAttrsCollection = {
+    [A in AttrsType]: Attrs
+}
+
 interface IAttrs {
     readonly type: AttrsType
     readonly name: string

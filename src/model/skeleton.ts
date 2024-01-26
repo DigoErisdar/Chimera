@@ -1,6 +1,7 @@
 import { Body, ComponentType, Head, IBody, IHead, IPart, IStructure } from '../model/part.ts'
+import { IAttrsCollection } from '@/model/attrs.ts'
 
-interface ISkeleton {
+export interface ISkeleton {
     components: IStructure
 }
 
@@ -29,5 +30,11 @@ export class Skeleton implements ISkeleton {
 
     set body(component: IBody) {
         if (component instanceof Body) this.setComponent(component)
+    }
+
+    getAttrs(): IAttrsCollection[] {
+        return Object.values(this.components)
+            .filter((c: IPart) => c?.attrs)
+            .map((c: IPart) => c.attrs)
     }
 }
