@@ -3,6 +3,23 @@
   "version": "0.0.1",
   "private": true,
   "author": "Digo Erisdar",
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.+(ts|tsx|js)",
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/src/$1"
+    },
+    "testEnvironment": "node"
+  },
   "scripts": {
     "test": "jest"
   },
@@ -30,5 +47,6 @@
     "prettier": "^2.8.8",
     "ts-node": "^10.9.2",
     "typescript": "5.0.4"
-  }
+  },
+  "dependencies": {}
 }

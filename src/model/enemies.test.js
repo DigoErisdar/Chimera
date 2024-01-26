@@ -1,7 +1,7 @@
 import { Enemy } from './enemies'
-import { Body, Head } from './part'
+import { Body, ComponentType, Head } from './part'
 import { AttrsType } from './attrs'
-import { HP } from '../entities/attrs'
+import { HP } from 'src/entities/attrs'
 
 class Dummy extends Enemy {}
 
@@ -22,6 +22,9 @@ describe('Model Enemies', () => {
         const enemy = new Dummy()
         enemy.skeleton.head = new DummyHead()
         enemy.skeleton.body = new DummyBody()
-        expect(enemy.getAttrs()?.hp.value).toBe(30)
+        expect(enemy.getAttrs()?.hp).toBe(30)
+        expect(enemy.getAttrs()?.hp).toBe(30)
+        expect(enemy.getAttrs([ComponentType.Body])?.hp).toBe(20)
+        expect(enemy.getAttrs([ComponentType.Body])?.hp).toBe(20)
     })
 })
