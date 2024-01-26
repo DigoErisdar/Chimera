@@ -14,13 +14,17 @@ export abstract class Part implements IPart {
 }
 
 export abstract class Head extends Part implements IHead {
-    readonly type = ComponentType.Head
+    static get type(): ComponentType {
+        return ComponentType.Head
+    }
 }
 
 export type IBody = IPart
 
 export abstract class Body extends Part implements IBody {
-    readonly type = ComponentType.Body
+    static get type(): ComponentType {
+        return ComponentType.Body
+    }
 }
 
 export type IStructure = Record<ComponentType, IPart>

@@ -12,6 +12,10 @@ describe('Model Skeleton', () => {
     let body = new DummyBody()
     beforeEach(() => (skeleton = new Skeleton()))
 
+    test('set component', () => {
+        skeleton.head = head
+        expect(skeleton.head === undefined).toBeFalsy()
+    })
     test('add duplicate component', () => {
         skeleton.head = head
         skeleton.head = head2

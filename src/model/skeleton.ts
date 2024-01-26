@@ -10,8 +10,8 @@ export class Skeleton implements ISkeleton {
         [ComponentType.Body]: undefined
     }
 
-    private setComponent(component: IPart): void {
-        this.components[component.type] = component
+    private setComponent(component: any): void {
+        this.components[(component.constructor as IPart).type] = component
     }
 
     //TODO: Попробовать использовать defineProperty
